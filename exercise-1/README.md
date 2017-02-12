@@ -1,30 +1,24 @@
 # Exercise-1
-In this exercise, you'll practice creating a repository, adding collaborators, and integrating the work of others through `rebasing`. You should work in groups of two or more.
+In this exercise, you'll practice working with branches, including **merging** changes between them.
 
-## Set up
+For this exercise, complete the following steps:
 
-To set up the repository, take the following steps:
+1. Clone _this_ module repository.
 
-- **Person 1** should create a new repository on GitHub with a `README.md` file.
-- **Person 1** should add **Person 2** as a collaborator to the repository on GitHub
-- **Person 1** should then create two issues on GitHub: _edit README.md_ and _create exercise.R_
-- **Person 1 and Person 2** should _both_ clone the repository to their machine
+2. Open up _this_ `README.md` file in Atom. Be sure to open the one in the `exercise-1` folder!
 
-## Simultaneous Contribution
+3. Create and `checkout` a new branch called `experiment`
 
-Here, we'll see how multiple people contributing to the same project can prevent individuals from pushing to GitHub:
+4. Add a sentence at the bottom of the `README.md` file. What you had for breakfast is fine. Remember to save your changes to disk!
 
-- **Person 1** should edit the `README.md` file by adding a line that describes the project
-- **Person 1** should then `add` and `commit` those changes, then push those changes up to GitHub (make sure to close issue 1 with a commit message)
-- **Person 2** should then create a _new file_ called `exercise.R`, and add a line of code to that file (whatever you want: `x <- 1`).
-- **Person 2** should then `add` and `commit` their changes, and attempt pushing up to GitHub (make sure to close issue 2 with a commit message)
+5. Commit your change (hint: use `git commit -am "msg"` to add and commit at once!)
 
-At this point, GitHub should prevent **Person 2** from pushing because they are not working on top of the most recent commit to the project.
+6. `checkout` the `master` branch. You shuld see your previous sentence disappear!
 
-## Rebasing
-To allow **Person 2** to replay their changes on top of the most recent version of the project, they should `rebase` the changes from the remote:
+7. Add yet another sentence **at the top of the file** --- for example, a title or subtitle.
 
-- **Person 2** should pull and rebase changes from GitHub (i.e., `git pull --rebase origin master`). This should work smoothly because **Person 1** and **Person 2** did not edit the same line of the same file
-- **Person 2** should now be able to push their (integrated) changes up to GitHub.
+8. Commit your change
 
-This exercise is a simple example of using rebasing _without_ conflict. To practice encountering conflict, see [exercise-2](../exercise-2).
+9. Switch between the experiment and master branches (clicking on your editor in-between). Do you see the file contents changing? Note: In some editors you may need to close and re-open the file to see the changes.
+
+10. Now `merge` the contents from `experiment` ___into___ `master`. Remember you'll want to switch to the `master` branch first (the one you are merging ___into___).
