@@ -62,7 +62,7 @@ git branch [branch_name]
 
 Will create a new branch called `branch_name` (replace this, including the brackets, with whatever name you want). Note that if you run `git branch` again you'll see that this _hasn't actually changed what branch you're on_. In fact, all you've done is created a new _reference_ (like a new variable!) that refers to the current commit as the given branch name.
 
-- You can almost think of this like creating a new variable called `branch_name` and assigning the latest commit to that! Almost like you wrote `new_branch <- my_last_commit`.
+- You can think of this like creating a new variable called `branch_name` and assigning the latest commit to that! Almost like you wrote `new_branch = my_last_commit`.
 
 - If you're familiar with [LinkedLists](https://en.wikipedia.org/wiki/Linked_list), it's a similar idea to changing a pointer in those.
 
@@ -74,7 +74,7 @@ git checkout [branch_name]
 
 **Checking out** a branch doesn't actually create a new commit! All it does is change the `HEAD` (the "commit I'm currently looking at") so that it now refers to the latest commit of the target branch. You can confirm that the branch has changed with `git branch`.
 
-- You can almost think of this like assigning a new value (the latest commit of the target branch) to the `HEAD` variable. Almost like you write `HEAD <- branch_name_last_commit`.
+- You can think of this like assigning a new value (the latest commit of the target branch) to the `HEAD` variable. Almost like you write `HEAD = branch_name_last_commit`.
 
 - Note that you can create _and_ checkout a branch in a single step using the `-b` option of git checkout:
 
@@ -82,7 +82,7 @@ git checkout [branch_name]
     git checkout -b [branch_name]
     ```
 
-Once you've checked out a particular branch, any _new_ commits from this point on will be "attached" to the "HEAD" of that branch, while the "HEAD" of other branches (e.g., `master`) will stay the same. If you use `git checkout` again, you can switch back to the other branch.
+Once you've checked out a particular branch, any _new_ commits from that point on will be "attached" to the "HEAD" of that branch, while the "HEAD" of other branches (e.g., `master`) will stay the same. If you use `git checkout` again, you can switch back to the other branch.
 
 - **Important** checking out a branch will "reset" your code to whatever it looked like when you made that commit. Switch back and forth between branches and watch your code change!
 
@@ -102,11 +102,11 @@ git merge [other_branch] --no-edit
 
 This command will merge `other_branch` **into the current branch**. So if you want to end up with the "combined" version of your commits on a particular branch, you'll need to switch to (`checkout`) that branch before you run the merge.
 
-- When merging, git may create a _new_ commit "combined" commit indicating that the branches have now been merged. The `--no-edit` option will tell git to use the default commit message when creating the new "combined" commit. If you forget this, you'll be thrown into the command-line editor. Remember, type `:q!` to escape from _vi_; if you do so, check the `status` of the repo to make sure the merge finished!
+- When merging, git may create a _new_ "combined" commit indicating that the branches have now been merged. The `--no-edit` option will tell git to use the default commit message when creating the new "combined" commit. If you forget this, you'll be thrown into the command-line editor. Remember, type `:q!` to escape from _vi_; if you do so, check the `status` of the repo to make sure the merge finished!
 
     - **IMPORTANT** If something goes wrong, don't panic and try to close your command-line! Come back to the module and look up how to fix the problem you've encounter (e.g., how to exit  _vi_. And if you're unsure why something isn't working with git, use **`git status`** to check the current status and for what steps to do next.
 
-- Note that the `rebase` command will perform a similar operation, but without creating a new "merge" commit--it simply takes the commits from one branch and attaches them to the end of the other. This effectively **changes history**, since it is no longer clear where the branching occurred. From an archival and academic view, we never want to "destroy history" and lose a record of changes that were made. History is important: don't screw with it! Thus I recommend you _avoid_ rebasing and stick with merging.
+- Note that the `rebase` command will perform a similar operation, but without creating a new "merge" commit&mdash;it simply takes the commits from one branch and attaches them to the end of the other. This effectively **changes history**, since it is no longer clear where the branching occurred. From an archival and academic view, we never want to "destroy history" and lose a record of changes that were made. History is important: don't screw with it! Thus I recommend you _avoid_ rebasing and stick with merging.
 
 To practice creating and merging branches, see [exercise-1](exercise-1).
 
@@ -114,7 +114,7 @@ To practice creating and merging branches, see [exercise-1](exercise-1).
 ### Merge Conflicts
 Merging is a regular occurrence when working with branches. But consider the following situation:
 
-1. You're on the master branch.
+1. You're on the `master` branch.
 2. You create and `checkout` a new branch called `danger`
 3. On the `danger` branch, you change line 12 of the code to be "I like kitties". You then commit this change (with message "Change line 12 of danger").
 4. You `checkout` (switch to) the `master` branch again.
@@ -123,7 +123,7 @@ Merging is a regular occurrence when working with branches. But consider the fol
 
 In this situation, you are trying to _merge two different changes to the same line of code_, and thus should be shown an error on the command-line:
 
-![Merge conflict error](img/merge-conflict-error.png)
+![Merge conflict error](img/merge-conflict-error-py.png)
 
 This is called a **merge conflict**. A merge conflict occurs when two commits from different branches include different changes to the same code (they conflict). Git is just a simple computer program, and has no way of knowing which version to keep ("are kitties better than puppies? How should I know?!").
 
@@ -137,9 +137,9 @@ In order to resolve the conflict:
 
 1. Use `git status` to see which files have merge conflicts. Note that files may have more than one conflict!
 
-2. Choose which version of the code to keep (or keep a combination, or replace it with something new entirely!) You do this by **editing the file** (i.e., open it in R Studio and change it). Pretend that your cat walked across your keyboard and added a bunch of extra junk; it is now your task to fix your work and restore it to a clean, working state. ___Be sure and test your changes to make sure things work!___
+2. Choose which version of the code to keep (or keep a combination, or replace it with something new entirely!) You do this by **editing the file** (i.e., open it in Visual Studio Code and change it). Pretend that your cat walked across your keyboard and added a bunch of extra junk; it is now your task to fix your work and restore it to a clean, working state. ___Be sure and test your changes to make sure things work!___
 
-3. Be sure and remove the `<<<<<<<` and `=======` and `>>>>>>>` These are not legal code in any language.
+3. Be sure and remove the `<<<<<<<` and `=======` and `>>>>>>>`. These are not legal code in any language.
 
 4. Once you're satisfied that the conflicts are all resolved and everything works as it should, follow the instructions in the error message and `add` and `commit` your changes (the code you "modified" to resolve the conflict):
 
@@ -185,7 +185,7 @@ git checkout -b [branch_name] [commit_number]
 
 This command treats the commit as if it was the HEAD of a named branch... where the name of that branch is the commit number. You can then make further changes and merge it back into your development or `master` branch.
 
-- **IMPORTANT NOTE**: If you don't create a _new branch_ (with **`-b`**) when checking out an old commit, you'll enter **detached HEAD state**. You can't commit from here, because there is no branch for that commit to be attached to! See [this tutorial (scroll down)](https://www.atlassian.com/git/tutorials/using-branches/git-checkout) for details & diagrams. If you find yourself in a detached HEAD state, you can use `git checkout master` to get back to the last saved commit (though you will lose any changes you made in that detached state&mdash;so just avoid it in the first place!)
+- **IMPORTANT NOTE**: If you don't create a _new branch_ (with **`-b`**) when checking out an old commit, you'll enter **detached HEAD state**. You can't commit from here, because there is no branch for that commit to be attached to! See [this tutorial (scroll down)](https://www.atlassian.com/git/tutorials/using-branches/git-checkout) for details and diagrams. If you find yourself in a detached HEAD state, you can use `git checkout master` to get back to the last saved commit (though you will lose any changes you made in that detached state&mdash;so just avoid it in the first place!)
 
 But what if you just had one bad commit, and don't want to throw out other good changes you made later? For this, you can use the `git revert` command:
 
@@ -193,9 +193,9 @@ But what if you just had one bad commit, and don't want to throw out other good 
 git revert [commit_number] --no-edit
 ```
 
-This will determine what changes that commit made to the files, and then apply the _opposite_ changes to effectively "back out" the commit. Note that this **does not** go back _to_ the given commit number (that's what `checkout` is for!), but rather _undoes the commit you specify_.
+This will determine what changes that commit made to the files, and then apply the _opposite_ changes to effectively "back out" the commit. Note that this **does not** go back _to_ the given commit number (that's what `checkout` is for!), but rather _reverse the commit you specify_.
 
-- This command does create a new commit (the `--no-edit` option tells git that you don't want to include a custom commit message). This is great from an archival point of view: we never "destroy history" and lose the record of what changes were made. History is important: don't screw with it!
+- This command does create a new commit (the `--no-edit` option tells git that you don't want to include a custom commit message). This is great from an archival point of view: we never "destroy history" and lose the record of what changes were made and then reverted. History is important: don't screw with it!
 
     The `reset` command will destroy history. **Do not use it**, no matter what StackOverflow tells you to do.
 
@@ -215,7 +215,7 @@ Thus in practice, when working with GitHub (and especially with multiple people,
 2. _Resolve_ any merge conflicts that occurred
 3. `push` (upload) your merged set of changes
 
-Additionally, because GitHub repositories are repositories just like the ones on your local machine, they can have branches as well! (You have seen that each learning module has a `complete` branch). You have access to any _remote_ branches when you `clone` a repo; you can see a list of them with `git branch -a` (using the `all` option).
+Additionally, because GitHub repositories are repos just like the ones on your local machine, they can have branches as well! (You have seen that each learning module has a `complete` branch). You have access to any _remote_ branches when you `clone` a repo; you can see a list of them with `git branch -a` (using the `all` option).
 
 If you create a new branch on your local machine, it is possible to push _that branch_ to GitHub, creating a mirroring branch on the remote repo. You do this by specifying the branch in the `git push` command:
 
@@ -235,9 +235,9 @@ Tracking will be remembered once set up, so you only need to use the `-u` option
 
 
 ### GitHub Pages
-GitHub's use of branches provides a number of additional features, one of which is the ability  to **host** web pages (`.html` files, like what you generate from R Markdown) on a publicly accessible web server that can "serve" the page to anyone who requests it. This feature is known as [GitHub Pages](https://help.github.com/articles/what-is-github-pages/).
+GitHub's use of branches provides a number of additional features, one of which is the ability  to **host** web pages (`.html` files, which can be generated from Markdown or Jupyter notebooks) on a publicly accessible web server that can "serve" the page to anyone who requests it. This feature is known as [GitHub Pages](https://help.github.com/articles/what-is-github-pages/).
 
-With GitHub pages, GitHub will serve your files visitors as long as the files are in a branch with a magic name: **`gh-pages`**. Thus in order to **publish** your webpage and make it available online, all you need to do is create that branch, merge your content into it, and then push that branch to GitHub
+With GitHub pages, GitHub will serve your files to visitors as long as the files are in a branch with a magic name: **`gh-pages`**. Thus in order to **publish** your webpage and make it available online, all you need to do is create that branch, merge your content into it, and then push that branch to GitHub.
 
 You almost always want to create the new `gh-pages` branch off of your `master` branch. This is because you usually want to publish the "finished" version, which is traditionally represented by the `master` branch. This means you'll need to switch over to `master`, and then create a new branch from there:
 
@@ -262,15 +262,15 @@ https://GITHUB-USERNAME.github.io/REPO-NAME
 
 (Replace `GITHUB-USERNAME` with the user name **of the account hosting the repo**, and `REPO-NAME` with your repository name).
 
-- This means that if you're making your homework reports available, the `GITHUB-USERNAME` will be the name of the course organization (e.g., `info201-w17`).
+- This means that if you're making your homework reports available, the `GITHUB-USERNAME` will be the name of the course organization (e.g., `infx598i-s17`).
 
 Three important notes:
 
 1. The `gh-pages` branch must be named _exactly_ that. If you misspell the name, or use an underscore instead of a dash, it won't work.
 
-1. Only the files and commits in the `gh-pages` branch are visible on the web. All commits in other branches (`experiment`, `master`, etc.) are not visible on the web (other than as source code in the repo). This allows you to work on your site with others before publishing those changes to the web.
+2. Only the files and commits in the `gh-pages` branch are visible on the web. All commits in other branches (`experiment`, `master`, etc.) are not visible on the web (other than as source code in the repo). This allows you to work on your site with others before publishing those changes to the web.
 
-1. Any content in the `gh-pages` branch will be publicly accessible, even if your repo is private. You can remove specific files from the `gh-pages` branch that you don't want visible on the web, while still keeping them in the `master` branch: use the `git rm` to remove the file and then add, commit, and push the deletion.
+3. Any content in the `gh-pages` branch will be publicly accessible, even if your repo is private. You can remove specific files from the `gh-pages` branch that you don't want visible on the web, while still keeping them in the `master` branch: use the `git rm` to remove the file and then add, commit, and push the deletion.
 
     - Be careful not push [any passwords or anything](http://www.itnews.com.au/news/aws-urges-developers-to-scrub-github-of-secret-keys-375785) to GitHub!
 
@@ -312,9 +312,9 @@ In order to make sure everyone is able to `push` to the repository, whoever crea
 Once you've added everyone to the GitHub repository, **each team member** will need to **`clone`** the repository to their local machine to work on the code individually. Collaborators can then `push` any changes they make to the central repository, and `pull` and changes made by others.
 
 ### Feature Branches
-The core idea behind the [**feature branch workflow**](https://www.atlassian.com/git/tutorials/comparing-workflows#feature-branch-workflow) is that all development should take place on a dedicated **feature branch**, rather than on the `master` branch. This allows for different people to work on different branches without disturbing the main codebase. For example, you might have one branch `visualization` that focuses on adding a complex visualization, or another `experimental-analysis` that tries a bold new approach to wrangling the data. Each branch is based on a _feature_ (capability or part) of the project, not a particular person: a person could be working on multiple feature branches.
+The core idea behind the [**feature branch workflow**](https://www.atlassian.com/git/tutorials/comparing-workflows#feature-branch-workflow) is that all development should take place on a dedicated **feature branch**, rather than on the `master` branch. This allows for different people to work on different branches without disturbing the main codebase. For example, you might have one branch `visualization` that focuses on adding a complex visualization, or another `experimental-analysis` that tries a bold new approach to processing the data. Each branch is based on a _feature_ (capability or part) of the project, not a particular person: a person could be working on multiple feature branches.
 
-The idea is that the `master` branch _always_ contains production-level code: valid, completely working code that you could deploy or publish (read: give to your boss or teacher) at a whim. Each feature branch branches off of `master`, and are allowed to contain temporary or broken code (since they are still in development). There way there is always a "working" (if incomplete) copy of the code (`master`), and development can be kept isolated and considered independent of the whole. This is similar to the example with the `experiment` branch above.
+The idea is that the `master` branch _always_ contains "production-level" code: valid, completely working code that you could deploy or publish (read: give to your boss or teacher) at a whim. All feature branches branch off of `master`, and are allowed to contain temporary or broken code (since they are still in development). This way there is always a "working" (if incomplete) copy of the code (`master`), and development can be kept isolated and considered independent of the whole. This is similar to the example with the `experiment` branch above.
 
 The workflow thus works like this:
 
@@ -350,7 +350,7 @@ The workflow thus works like this:
     # work is done outside of terminal
 
     git add .
-    git commit -m "Adds progress on feature"
+    git commit -m "Adds more progress on feature"
     git push origin adas-feature
     ```
 
